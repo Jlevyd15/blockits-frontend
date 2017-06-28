@@ -1,0 +1,31 @@
+GDAX Value
+---------------------
+sum of all crypto accounts (eth, ltc, btc, usd)
+
+HTTP REQUEST
+
+GET /accounts
+
+
+FIAT INVESTED
+-------------------------
+
+HTTP REQUEST
+
+POST /deposits/payment-method
+
+USD Invested = total of all deposits
+
+
+RETURN (% gain/loss)
+-------------------------------------
+
+previous value = Fiat invested
+
+return = ((current value - previous value) / previous value) * 100
+
+((7000 - 4000) / 4000) * 100
+
+
+
+
