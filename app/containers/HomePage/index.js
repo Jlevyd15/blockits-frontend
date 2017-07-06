@@ -27,8 +27,9 @@ class HomePage extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
   	const routeToAccountPage = () => {
   		const { keyValue, secretValue, passphrase } = this.props
+      console.log('just before make api call')
   		this.props.makeApiCall(keyValue, secretValue, passphrase);
-  		this.props.router.push('/account');
+  		// this.props.router.push('/dashboard');
   	}
   	return	(
 		<Wrapper>

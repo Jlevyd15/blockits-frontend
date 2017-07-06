@@ -50,7 +50,7 @@ export default function createReducer(asyncReducers) {
   return combineReducers({
     route: routeReducer,
     language: languageProviderReducer,
-    gdax: gdaxApiReducer,
+    // gdax: gdaxApiReducer,
     fields: fieldReducer,
     ...asyncReducers,
   });

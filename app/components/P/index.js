@@ -5,6 +5,7 @@ const P = styled.p`
   font-size: ${constants.fontStyles.bodyText};
   text-align: center;
   color: black;
+  margin: auto 0px;
 `;
 
 export default P

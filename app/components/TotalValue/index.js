@@ -1,6 +1,7 @@
 import React from 'react'
 import H2 from '../H2'
 import P from '../P'
+import FlexContainer from '../FlexContainer'
 
 const TotalValue = ({ data }) => {
 
@@ -21,12 +22,18 @@ const TotalValue = ({ data }) => {
 
 	return (
 		<div>
-			<H2>Account Value</H2>
-			<P>{getAccountValue()}</P>
-			<H2>Fiat Value</H2>
-			<P>{getDepositValue()}</P>
-			<H2>% Return</H2>
-			<P>{((getAccountValue() - getDepositValue()) / getDepositValue()) * 100}%</P>
+			<FlexContainer>
+				<H2>Account Value</H2>
+				<P>{getAccountValue()}</P>
+			</FlexContainer>
+			<FlexContainer>
+				<H2>Fiat Value</H2>
+				<P>{getDepositValue()}</P>
+			</FlexContainer>
+			<FlexContainer>
+				<H2>% Return</H2>
+				<P>{((getAccountValue() - getDepositValue()) / getDepositValue()) * 100}%</P>
+			</FlexContainer>
 		</div>
 	)
 }

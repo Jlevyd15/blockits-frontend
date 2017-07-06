@@ -22,14 +22,14 @@ export default function createRoutes(store) {
       name: 'home',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          // import('containers/App/sagas'),
           import('containers/HomePage'),
-          import('containers/App/sagas'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component, sagas]) => {
-          injectSagas(sagas.default);
+        importModules.then(([component]) => {
+          // injectSagas(sagas.default);
           renderRoute(component);
         });
 
@@ -40,13 +40,33 @@ export default function createRoutes(store) {
       name: 'account',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
+          import('containers/AccountInfo/reducer'),
           import('containers/AccountInfo'),
-          import('containers/App/sagas'),
         ]);
 
         const renderRoute = loadModule(cb);
 
-        importModules.then(([component, sagas]) => {
+        importModules.then(([reducer, component]) => {
+          injectReducer('account', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
+      path: '/dashboard',
+      name: 'dashboard',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/Dashboard/reducer'),
+          import('containers/Dashboard/sagas'),
+          import('containers/Dashboard'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('dashboard', reducer.default);
           injectSagas(sagas.default);
           renderRoute(component);
         });

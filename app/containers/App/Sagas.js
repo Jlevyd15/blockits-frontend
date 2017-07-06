@@ -1,15 +1,15 @@
-import { call, put, takeEvery, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, cancel, take } from 'redux-saga/effects';
 import * as Api from '../../utils/Api';
+import { LOCATION_CHANGE } from 'react-router-redux';
+import request from 'utils/request';
 
-// Your sagas for this container
-export default [
-  mySaga,
-];
 
-// Individual exports for testing
+// responds to GDAX fetch requests
 function* fetchGdaxData(action) {
+  const requestURL = `/data/login`;
   try {
     const { data } = yield call(Api.fetchGdaxData);
+    // const { data } = yield call(request, requestURL);
     yield put({ type: 'GDAX_FETCH_SUCCEEDED', payload: data });
   } catch (e) {
     yield put({ type: 'GDAX_FETCH_FAILED', message: e.message });
@@ -17,5 +17,15 @@ function* fetchGdaxData(action) {
 }
 
 function* mySaga() {
-  yield takeLatest('GDAX_FETCH_REQUESTED', fetchGdaxData);
+	const gdaxDataFetcher = yield takeLatest('GDAX_FETCH_REQUESTED', fetchGdaxData);
+	
+	yield take(LOCATION_CHANGE);
+	yield cancel(gdaxDataFetcher);
 }
+
+
+
+// Your sagas for this container
+export default [
+  mySaga,
+];

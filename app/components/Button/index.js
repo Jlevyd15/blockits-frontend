@@ -4,7 +4,7 @@ import ButtonStyled from './ButtonStyled';
 
 const Button = ({ btnText, callback }) => {
 	const handleButtonCallback = () => {
-
+		// console.log('called button callback')
 		return callback()
 	}
 
